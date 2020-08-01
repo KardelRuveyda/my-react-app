@@ -7,7 +7,7 @@ function App() {
   const isAuth = true;
   return (
     <div className="App">
-     <h4>App Component</h4>
+     <h4>App Component </h4>
      <User/>
      </div>
   );
