@@ -25,8 +25,16 @@ class User extends Component {
     //     }
     // }
     
-    onClickEvent = (number,e) => {
-        console.log(number);
+    onClickEvent = (e) => {
+        this.setState({
+            isVisible:true
+        })
+    }
+
+    onClickDelete =(e)=> {
+        const{id,deleteUser}= this.props;
+
+        deleteUser(id);
     }
 
     render() {
@@ -38,8 +46,8 @@ class User extends Component {
             <div className="col-md-8 mb-4">
                 <div className="card">
                     <div className="card-header d-flex justify-content-between">
-                          <h4 className="d-inline" onClick={this.onClickEvent.bind(this,61)}>{name}</h4>
-                          <i className="fa fa-trash fa-lg" style={{cursor: "pointer"}}></i>
+                          <h4 className="d-inline" onClick={this.onClickEvent}>{name}</h4>
+                          <i onClick={this.onClickDelete} className="fa fa-trash fa-lg" style={{cursor: "pointer"}}></i>
                     </div>
                 </div>
                 {
@@ -59,6 +67,7 @@ class User extends Component {
 User.propTypes = {
     name: PropTypes.string.isRequired,
     age : PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    deleteUser : PropTypes.func.isRequired
 }
 export default User;
