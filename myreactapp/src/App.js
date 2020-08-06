@@ -5,11 +5,9 @@ import './App.css';
 
 class App extends Component{
   render(){
-    const test=61;
-    const isAuth=true;
     return(
       <div className="App">
-        <Navbar title = "User Application"/>
+        <Navbar title="User Application"/>
         <hr/>
         <User
           name="Kardel Rüveyda Çetin"
