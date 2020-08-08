@@ -42,6 +42,10 @@ class User extends Component {
         });
     }
 
+    componentWillUnmount(){
+        console.log("Component will Unmount!");
+    }
+
     render() {
         //Destructing
         const{name,age,title} = this.props; 
