@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import User from "./User"
-import PropTypes from 'prop-types'
-
+import UserConsumer from "../context"
 
 class Users extends Component {
     render() {
-        const{users,deleteUser} = this.props;
-         return (
+
+        return(
+            <UserConsumer>
+                {
+                    value => {
+                        const {users}=value;
+     return (
             <div>
                 {
                     users.map(user => {
@@ -17,17 +21,19 @@ class Users extends Component {
                             name = {user.name}
                             age = {user.age}
                             title = {user.title} 
-                            deleteUser = {deleteUser}                        
                             />
                         )
                     })
                 }
             </div>
         )
+                    }
+                }
+            </UserConsumer>
+        )
+
+       
     }
 }
-Users.propTypes = {
-    users: PropTypes.array.isRequired,
-    deleteUser: PropTypes.func.isRequired
-}
+
 export default Users;
