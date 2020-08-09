@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "unique-1",
+      "name": "Kardel Rüveyda Çetin",
+      "age": "25",
+      "title": "Yazılım Uzmanı"
+    },
+    {
+      "id": "unique-2",
+      "name": "Orhancan Çetin",
+      "age": "17",
+      "title": "Öğrenci"
+    },
+    {
+      "name": "Kardel",
+      "age": "18",
+      "title": "Test",
+      "id": "Rn8hRxc"
+    }
+  ]
+}

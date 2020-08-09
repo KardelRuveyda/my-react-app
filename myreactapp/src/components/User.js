@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import UserConsumer from '../context'
+import axios from "axios";
+import {Link} from "react-router-dom";
+
 
 class User extends Component {
     state = {
@@ -32,9 +35,11 @@ class User extends Component {
         })
     }
 
-    onClickDelete =(dispatch,e)=> {
+    onClickDelete = async (dispatch,e)=> {
         const{id}= this.props;
         //Consumer Dispatch
+        //Delete Request
+        await axios.delete(`http://localhost:3004/users/${id}`)
 
         dispatch({
             type: "DELETE_USER",
@@ -48,7 +53,7 @@ class User extends Component {
 
     render() {
         //Destructing
-        const{name,age,title} = this.props; 
+        const{id,name,age,title} = this.props; 
         const{isVisible} = this.state;
 
         return (
@@ -70,6 +75,7 @@ class User extends Component {
                         <div className="card-body"style= {isVisible ? {backgroundColor :"#62848d"} : null} >
                             <p className="card-text">Yaş : {age}</p>
                             <p className="card-text">Unvan: {title}</p>
+                            <Link to = {`edit/${id}`} className="btn btn-dark btn-block">Update User</Link>
                     </div>:null
                     }
 

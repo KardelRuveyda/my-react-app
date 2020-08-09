@@ -1,6 +1,5 @@
 import React,{Component} from "react";
-
-
+import axios from "axios";
 const UserContext = React.createContext();
 //Provider, Consumer (Sağlayıcı Tüketici)
 
@@ -23,31 +22,18 @@ const reducer = (state,action) => {
 
 export  class UserProvider extends Component {
     state = {
-        users: [
-          {
-            id:"unique-1",
-            name: "Kardel Rüveyda Çetin",
-            age :"25",
-            title:"Yazılım Uzmanı"
-          },
-          {
-            id:"unique-2",
-            name: "Orhancan Çetin",
-            age :"17",
-            title:"Öğrenci"  
-          },
-          {
-            id:"unique-3",
-            name: "Mehmet Eymen Küçükali",
-            age :"10",
-            title:"Öğrenci"
-          }
-        ],
-
+        users: [],
         dispatch : action => {
             this.setState(state => reducer(state,action))
         }
       }
+
+    componentDidMount  = async () => {
+        const response = await axios.get("http://localhost:3004/users");
+        this.setState({
+            users: response.data
+        })
+    }
     
     render() {
         return (
