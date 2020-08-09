@@ -36,7 +36,29 @@ class UpdateUser extends Component {
     updateUser =  async (dispatch,e) => {
         e.preventDefault();
 
+        const {id}= this.props.match.params;
+
+        const{name,age,title} = this.state;
+
+        const updatedUser = {
+            name,
+            age,
+            title
+        }
+
+        const response = await axios.put(`http://localhost:3004/users/${id}`,updatedUser);
+               
+        dispatch({
+            type: "UPDATE_USER",
+            payload: response.data
+        })
+        
+        //redirect 
+        this.props.history.push("/");
+
     }
+
+    
     render() {
         const{visible,name,age,title} = this.state;
 

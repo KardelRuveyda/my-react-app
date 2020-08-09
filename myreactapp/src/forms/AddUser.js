@@ -76,6 +76,10 @@ class AddUser extends Component {
             type:"ADD_USER",
             payload: response.data
         });
+
+        //redirect 
+
+        this.props.history.push("/");
     }
     render() {
         const{visible,name,age,title} = this.state;
