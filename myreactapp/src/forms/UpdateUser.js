@@ -8,9 +8,18 @@ class UpdateUser extends Component {
     state = {
         name:"",
         age:"",
-        title:""
+        title:"",
+        error:false 
     }
 
+    validateForm =()=> {
+        const{name,age,title} = this.state;
+
+        if(name == "" || age =="" || title ==""){
+            return false;
+        }
+        return true;
+    }
 
     changeInput = (e) => {
         this.setState({
@@ -46,6 +55,14 @@ class UpdateUser extends Component {
             title
         }
 
+        if(!this.validateForm()){
+            this.setState({
+                error:true
+            })
+            return;
+        }
+        
+
         const response = await axios.put(`http://localhost:3004/users/${id}`,updatedUser);
                
         dispatch({
@@ -60,7 +77,7 @@ class UpdateUser extends Component {
 
     
     render() {
-        const{visible,name,age,title} = this.state;
+        const{visible,name,age,title,error} = this.state;
 
         return <UserConsumer>
             {
@@ -75,6 +92,13 @@ class UpdateUser extends Component {
                                 </div>
                             </div>
                             <div className="card-body">
+                            {
+                                    error ? 
+                                    <div className="alert alert-danger">
+                                        Lütfen bilgilerinizi kontrol edin.
+                                    </div>
+                                    : null
+                                }
                                 <form onSubmit={this.updateUser.bind(this,dispatch)}>
                                     <div className="form-group">
                                         <label htmlFor="name">Name</label>

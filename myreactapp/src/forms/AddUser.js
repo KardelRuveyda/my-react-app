@@ -24,12 +24,22 @@ class AddUser extends Component {
         visible: false,
         name:"",
         age:"",
-        title:""
+        title:"",
+        error: false
     }
     changeVisibility = (e) => {
         this.setState({
             visible: !this.state.visible
         })
+    }
+
+    validateForm =()=> {
+        const{name,age,title} = this.state;
+
+        if(name == "" || age =="" || title ==""){
+            return false;
+        }
+        return true;
     }
 
     changeInput = (e) => {
@@ -67,7 +77,13 @@ class AddUser extends Component {
             name,
             age,
             title
+        }
 
+        if(!this.validateForm()){
+            this.setState({
+                error:true
+            })
+            return;
         }
         
         const response = await axios.post("http://localhost:3004/users",newUser);
@@ -82,7 +98,7 @@ class AddUser extends Component {
         this.props.history.push("/");
     }
     render() {
-        const{visible,name,age,title} = this.state;
+        const{visible,name,age,title,error} = this.state;
 
         return <UserConsumer>
             {
@@ -99,6 +115,13 @@ class AddUser extends Component {
                                 </div>
                             </div>
                             <div className="card-body">
+                                {
+                                    error ? 
+                                    <div className="alert alert-danger">
+                                        Lütfen bilgilerinizi kontrol edin.
+                                    </div>
+                                    : null
+                                }
                                 <form onSubmit={this.addUser.bind(this,dispatch)}>
                                     <div className="form-group">
                                         <label htmlFor="name">Name</label>
